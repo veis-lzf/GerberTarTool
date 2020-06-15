@@ -272,7 +272,7 @@ CString CChangeNameDlg::GetNewName(CString postfix)
 		else if (postfix == _T("GBO")) // 底层丝印 
 			szName = _T("SILK_BOT.");
 		else if (postfix == _T("GBP")) // 底层钢网 
-			szName = _T("PASTE_TOP.");
+			szName = _T("PASTE_BOT.");
 		else if (postfix == _T("GBS")) // 底层阻焊
 			szName = _T("SOLDER_BOT.");
 		else if (postfix == _T("GBL")) // 底层线路
