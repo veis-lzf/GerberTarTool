@@ -51,4 +51,6 @@ private:
 
 public:
 	afx_msg void OnBnClickedOpenpath();
+private:
+	void CChangeNameDlg::GetPostFix(LPCTSTR lpszStr, CString& posfix);
 };

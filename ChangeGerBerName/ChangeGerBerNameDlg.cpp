@@ -134,7 +134,7 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	CString szDestDir, szSrcDir;
 	CString szDir; // 新建的目录
 	CString postfix;
-	TCHAR post1[10] = { _T('\0') }; // 后缀
+	CString post_;
 	BOOL bGet = FALSE;
 
 	m_bOutput = FALSE;
@@ -158,7 +158,8 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 			m_fileName = ff.GetFileTitle();
 			bGet = TRUE;
 		}
-		_stscanf(ff.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(ff.GetFileName(), postfix);
+		//_stscanf(ff.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = ff.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
@@ -169,7 +170,8 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fDrill.FindFile(m_szPath + m_fileName + _T(".TX*"));
 	while (bFind) {
 		bFind = fDrill.FindNextFile();
-		_stscanf(fDrill.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(fDrill.GetFileName(), postfix);
+		//_stscanf(fDrill.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = fDrill.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
@@ -179,9 +181,10 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fDRoud.FindFile(m_szPath + m_fileName + _T("*-RoundHoles.TX*")); // 圆孔
 	while (bFind) {
 		bFind = fDRoud.FindNextFile();
-		_stscanf(fDRoud.GetFileName().GetString(), _T("%*[^.].%[^\n]"), post1);
+		GetPostFix(fDRoud.GetFileName(), post_);
+		//_stscanf(fDRoud.GetFileName().GetString(), _T("%*[^.].%[^\n]"), post1);
 		_stscanf(fDRoud.GetFileName().GetString(), _T("%*[^-]%[^\n]"), postfix); // 提取后缀名称
-		szDestDir = szDir + _T("\\") + GetNewName(postfix) + _T(".") + post1;
+		szDestDir = szDir + _T("\\") + GetNewName(postfix) + _T(".") + post_;
 		szSrcDir = fDRoud.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
 	}
@@ -190,9 +193,10 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fDSolt.FindFile(m_szPath + m_fileName + _T("*-SlotHoles.TX*")); // 槽孔
 	while (bFind) {
 		bFind = fDSolt.FindNextFile();
-		_stscanf(fDSolt.GetFileName().GetString(), _T("%*[^.].%[^\n]"), post1);
+		GetPostFix(fDSolt.GetFileName(), post_);
+		//_stscanf(fDSolt.GetFileName().GetString(), _T("%*[^.].%[^\n]"), post1);
 		_stscanf(fDSolt.GetFileName().GetString(), _T("%*[^-]%[^\n]"), postfix); // 提取后缀名称
-		szDestDir = szDir + _T("\\") + GetNewName(postfix) + _T(".") + post1;
+		szDestDir = szDir + _T("\\") + GetNewName(postfix) + _T(".") + post_;
 		szSrcDir = fDSolt.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
 	}
@@ -201,7 +205,8 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fREP.FindFile(m_szPath + m_fileName + _T("*.R*")); // 拷贝REP和RUL
 	while (bFind) {
 		bFind = fREP.FindNextFile();
-		_stscanf(fREP.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(fREP.GetFileName(), postfix);
+		//_stscanf(fREP.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = fREP.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
@@ -211,7 +216,8 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fDRR.FindFile(m_szPath + m_fileName + _T("*.DR*")); // 拷贝DRR钻孔报表
 	while (bFind) {
 		bFind = fDRR.FindNextFile();
-		_stscanf(fDRR.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(fDRR.GetFileName(), postfix);
+		//_stscanf(fDRR.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = fDRR.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
@@ -221,7 +227,8 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fApr.FindFile(m_szPath + m_fileName + _T("*.apr")); // 拷贝光圈数据
 	while (bFind) {
 		bFind = fApr.FindNextFile();
-		_stscanf(fApr.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(fApr.GetFileName(), postfix);
+		//_stscanf(fApr.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = fApr.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
@@ -231,7 +238,8 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = ffARPEx.FindFile(m_szPath + m_fileName + _T("*.EXTREP")); // 拷贝光圈拓展数据
 	while (bFind) {
 		bFind = ffARPEx.FindNextFile();
-		_stscanf(ffARPEx.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(ffARPEx.GetFileName(), postfix);
+		//_stscanf(ffARPEx.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = ffARPEx.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
@@ -243,15 +251,44 @@ void CChangeNameDlg::OnBnClickedTarBtn()
 	bFind = fIPC.FindFile(m_szPath + _T("*.ipc"));
 	while (bFind) {
 		bFind = fIPC.FindNextFile();
-		_stscanf(fIPC.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		GetPostFix(fIPC.GetFileName(), postfix);
+		//_stscanf(fIPC.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
 		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
 		szSrcDir = fIPC.GetFilePath();
 		CopyFile(szSrcDir, szDestDir, FALSE);
 	}
 	fIPC.Close();
+
+	// 拷贝LDP钻孔对文件
+	CFileFind fLDP;
+	bFind = fLDP.FindFile(m_szPath + _T("*.LDP"));
+	while (bFind) {
+		bFind = fLDP.FindNextFile();
+		GetPostFix(fLDP.GetFileName(), postfix);
+		//_stscanf(fIPC.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
+		szSrcDir = fLDP.GetFilePath();
+		CopyFile(szSrcDir, szDestDir, FALSE);
+	}
+	fLDP.Close();
+
+	// 拷贝ARP_LIB钻孔对文件
+	CFileFind fARP_LIB;
+	bFind = fARP_LIB.FindFile(m_szPath + _T("*.APR_LIB"));
+	while (bFind) {
+		bFind = fARP_LIB.FindNextFile();
+		GetPostFix(fARP_LIB.GetFileName(), postfix);
+		//_stscanf(fIPC.GetFileName().GetString(), _T("%*[^.].%[^\n]"), postfix); // 提取后缀名称
+		szDestDir = szDir + _T("\\") + GetNewName(postfix) + postfix.GetString();
+		szSrcDir = fARP_LIB.GetFilePath();
+		CopyFile(szSrcDir, szDestDir, FALSE);
+	}
+	fARP_LIB.Close();
+
 	m_bOutput = TRUE;
 	AfxMessageBox(_T("Gerber 文件拷贝并重命名完成！"));
 	ShellExecute(NULL, _T("open"), m_szPath + _T("\\Gerber\\"), NULL, NULL, SW_SHOWNORMAL);
+
 }
 
 // 通过后缀获取需要重命名的名称
@@ -320,6 +357,8 @@ CString CChangeNameDlg::GetNewName(CString postfix)
 			szName = _T("LayerPairs.");
 		else if (postfix == _T("EXTREP")) // 额外文件，例如中心点坐标
 			szName = _T("AprExt.");
+		else if (postfix = _T("APR_LIB"))
+			szName = _T("APR_LIB_Macro");
 	}
 	else if (postfix.Find(_T("G")) != -1) // 正片内层
 		szName = CString("InterLayer") + postfix.GetString()[n - 1] + CString(".");
@@ -391,4 +430,12 @@ void CChangeNameDlg::OnBnClickedOpenpath()
 			pMalloc->Release();
 		m_cPath.SetWindowText(m_szPath);
 	}
+}
+
+
+void CChangeNameDlg::GetPostFix(LPCTSTR lpszStr, CString &posfix)
+{
+	CString szTmp = lpszStr;
+	int index = szTmp.ReverseFind(_T('.'));
+	posfix = szTmp.Right(szTmp.GetLength() - index - 1);
 }
